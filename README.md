@@ -1,73 +1,137 @@
-# Welcome to your Lovable project
+# 💸 Wise Ledger Hub – Expense Tracker
 
-## Project info
+Wise Ledger Hub is a modern, feature-rich expense tracker and budget management application built with the MERN stack (MongoDB, Express.js, React, Node.js) and enhanced with modern tooling. It helps you manage your finances, track income & expenses, plan budgets, and even get smart financial advice with an integrated AI assistant.
 
-**URL**: https://lovable.dev/projects/5f7ae5e6-f50d-496b-84b8-dd8e2d647748
+---
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+- **User Authentication:** Secure login/signup and protected routes.
+- **Dashboard:** Overview of your financial health, recent transactions, and key metrics.
+- **Expense & Income Tracking:** Easily add, edit, and categorize expenses and income.
+- **Budgeting:** Set and monitor custom budgets.
+- **Tax Calculator:** Calculate your Indian income tax (old/new regime) in rupees.
+- **Profile & Settings:** Manage personal info, preferences, currency, and more.
+- **Reports:** Visualize spending trends and download financial reports.
+- **AI Financial Assistant:** Get personalized advice on spending, saving, and budgeting.
+- **Responsive UI:** Works great on desktop and mobile.
+- **Notifications & Toasters:** Real-time feedback on actions.
+- **Secure & Scalable:** Built for modern web standards.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5f7ae5e6-f50d-496b-84b8-dd8e2d647748) and start prompting.
+## 🛠 Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+### **Frontend**
+- **React** – Component-based UI
+- **Vite** – Fast development and builds
+- **Tailwind CSS** – Utility-first styling
+- **shadcn/ui** – Accessible, customizable UI components
+- **React Router** – Client-side routing
 
-**Use your preferred IDE**
+### **Backend**
+- **Node.js** – Server runtime
+- **Express.js** – RESTful API
+- **MongoDB** – NoSQL database
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### **Other Tools**
+- **TanStack Query** – Data fetching and caching
+- **React Context** – State management for auth, transactions, etc.
+- **OpenAI (optional)** – AI-powered financial assistant
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🖥️ Getting Started
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### 1. **Clone the Repository**
+```bash
+git clone https://github.com/Harsh7817/wise-ledger-hub.git
+cd wise-ledger-hub
 ```
 
-**Edit a file directly in GitHub**
+### 2. **Install Frontend Dependencies**
+```bash
+cd client
+npm install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 3. **Install Backend Dependencies**
+```bash
+cd ../server
+npm install
+```
 
-**Use GitHub Codespaces**
+### 4. **Environment Variables**
+- Copy `.env.example` to `.env` in both `/client` and `/server` directories.
+- Fill in MongoDB URI, JWT secrets, and (optionally) OpenAI API key.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 5. **Start Development Servers**
+- **Backend:**
+  ```bash
+  cd server
+  npm run dev
+  ```
+- **Frontend:**
+  ```bash
+  cd client
+  npm run dev
+  ```
 
-## What technologies are used for this project?
+### 6. **Visit the App**
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📁 Project Structure
 
-## How can I deploy this project?
+```
+wise-ledger-hub/
+│
+├── client/          # Frontend (React, Vite, Tailwind)
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── contexts/
+│   │   └── ...
+│   └── ...
+│
+├── server/          # Backend (Node.js, Express, MongoDB)
+│   ├── models/
+│   ├── routes/
+│   ├── controllers/
+│   ├── middleware/
+│   └── ...
+│
+├── README.md
+└── ...
+```
 
-Simply open [Lovable](https://lovable.dev/projects/5f7ae5e6-f50d-496b-84b8-dd8e2d647748) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## 🧠 AI Assistant (Optional)
 
-Yes, you can!
+- To use the AI financial assistant, add your OpenAI API key to the backend `.env` and ensure the `/api/ai-assistant` endpoint is enabled.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 📝 Contributing
+
+Contributions are welcome!  
+1. Fork the repo  
+2. Create your feature branch  
+3. Commit changes  
+4. Open a Pull Request
+
+---
+
+## 📄 License
+
+[MIT](LICENSE)
+
+---
+
+## 🙋‍♀️ Authors & Credits
+
+Made with ❤️ by [@Harsh7817](https://github.com/Harsh7817), [@anushka48483](https://github.com/anushka48483) and contributors.
+
+---
