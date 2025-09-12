@@ -39,8 +39,13 @@ const categories = [
 ];
 
 export default function Expenses() {
+<<<<<<< HEAD
   const [expenses, setExpenses] = useState<Expense[]>([
     { id: 1, description: 'Whole Foods Market', amount: 125.50, category: 'Groceries', date: '2024-01-15', type: 'expense' },
+=======
+  const expenses = [
+    { id: 1, description: 'Foods Market', amount: 125.50, category: 'Groceries', date: '2024-01-15', type: 'expense' },
+>>>>>>> 4c6bbf044dca73ce0c340fdb53939448b3b2fd9b
     { id: 2, description: 'Shell Gas Station', amount: 45.20, category: 'Transportation', date: '2024-01-14', type: 'expense' },
     { id: 3, description: 'Netflix Subscription', amount: 15.99, category: 'Entertainment', date: '2024-01-13', type: 'expense' },
     { id: 4, description: 'Coffee Shop', amount: 8.75, category: 'Food & Dining', date: '2024-01-13', type: 'expense' },
