@@ -11,6 +11,9 @@ import Budget from "./pages/Budget";
 import TaxCalculator from "./pages/TaxCalculator";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+import Signup from "./pages/Signup";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +32,13 @@ const AppRoutes = () => {
   }
 
   if (!user) {
-    return <Login />;
+    return (
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<Login />} />
+      </Routes>
+    );
   }
 
   return (
@@ -39,6 +48,8 @@ const AppRoutes = () => {
       <Route path="/income" element={<Income />} />
       <Route path="/budget" element={<Budget />} />
       <Route path="/tax" element={<TaxCalculator />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/settings" element={<Settings />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>

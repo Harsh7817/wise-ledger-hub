@@ -14,6 +14,15 @@ import { useAuth } from '@/contexts/AuthContext';
 
 export const Header = () => {
   const { user, logout } = useAuth();
+  // Load avatar from profile storage
+  let profileAvatar = '';
+  try {
+    const raw = localStorage.getItem('wise_ledger_profile_v1');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      profileAvatar = parsed?.avatarDataUrl || '';
+    }
+  } catch {}
   return (
     <header className="h-16 border-b border-border bg-card px-6 flex items-center justify-between">
       <div className="flex items-center space-x-4 flex-1">
@@ -36,7 +45,7 @@ export const Header = () => {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="flex items-center space-x-2 px-3">
               <Avatar className="w-8 h-8">
-                <AvatarImage src="" />
+                <AvatarImage src={profileAvatar} />
                 <AvatarFallback className="bg-primary text-primary-foreground">
                   {user?.name?.charAt(0).toUpperCase() || 'U'}
                 </AvatarFallback>

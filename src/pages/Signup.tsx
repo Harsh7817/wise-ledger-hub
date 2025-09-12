@@ -9,13 +9,15 @@ import { Link } from 'react-router-dom';
 
 const PROFILE_STORAGE_KEY = 'wise_ledger_profile_v1';
 
-export default function Login() {
+export default function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
   const [avatarDataUrl, setAvatarDataUrl] = useState<string>('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { login } = useAuth();
 
   const onPickAvatar: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -28,27 +30,27 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    if (password !== confirm) {
+      setError('Passwords do not match.');
+      return;
+    }
     setIsLoading(true);
-    
     try {
-      // Persist basic profile so it shows immediately after login
-      const existingRaw = localStorage.getItem(PROFILE_STORAGE_KEY);
-      const existing = existingRaw ? JSON.parse(existingRaw) : {};
       const profile = {
-        name: name || existing.name || email.split('@')[0],
+        name: name || email.split('@')[0],
         email,
-        phone: existing.phone || '',
-        country: existing.country || 'India',
-        currency: existing.currency || 'INR',
-        dob: existing.dob || '',
-        occupation: existing.occupation || '',
-        avatarDataUrl: avatarDataUrl || existing.avatarDataUrl || '',
+        phone: '',
+        country: 'India',
+        currency: 'INR',
+        dob: '',
+        occupation: '',
+        avatarDataUrl,
       };
       localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
-
-      await login(email, password);
-    } catch (error) {
-      console.error('Login failed:', error);
+      await login(email, password); // demo: reuse login to simulate auth
+    } catch (err) {
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -63,80 +65,48 @@ export default function Login() {
               <PiggyBank className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold">Welcome to Smart Ledger</CardTitle>
-          <p className="text-muted-foreground">Login to access your financial dashboard</p>
+          <CardTitle className="text-2xl font-bold">Create your account</CardTitle>
+          <p className="text-muted-foreground">Sign up to get started</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+              <Label htmlFor="name">Full Name</Label>
+              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                <Input id="password" type={showPassword ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <Button type="button" variant="ghost" size="sm" className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="confirm">Confirm Password</Label>
+              <Input id="confirm" type={showPassword ? 'text' : 'password'} value={confirm} onChange={(e) => setConfirm(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="avatar">Avatar (optional)</Label>
               <Input id="avatar" type="file" accept="image/*" onChange={onPickAvatar} />
             </div>
-            <Button 
-              type="submit" 
-              className="w-full bg-gradient-to-r from-primary to-primary/90"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Logging in...' : 'Login'}
+            {error && <p className="text-sm text-destructive">{error}</p>}
+            <Button type="submit" className="w-full bg-gradient-to-r from-primary to-primary/90" disabled={isLoading}>
+              {isLoading ? 'Signing up...' : 'Sign Up'}
             </Button>
           </form>
-          
           <div className="mt-6 text-center text-sm">
-            New user? <Link to="/signup" className="text-primary hover:underline">Sign up</Link>
-          </div>
-          <div className="mt-2 text-center">
-            <p className="text-sm text-muted-foreground">
-              Demo Mode: Use any email and password to login
-            </p>
+            Already have an account? <Link to="/login" className="text-primary hover:underline">Login</Link>
           </div>
         </CardContent>
       </Card>
     </div>
   );
 }
+
+
