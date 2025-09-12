@@ -28,6 +28,7 @@ import {
   Edit,
   Trash2
 } from 'lucide-react';
+<<<<<<< HEAD
 import { useEffect, useMemo, useState } from 'react';
 
  type BudgetGroup = 'Needs' | 'Wants' | 'Savings';
@@ -100,6 +101,39 @@ export default function Budget() {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isExpenseOpen, setIsExpenseOpen] = useState(false);
+=======
+import { useState } from 'react';
+
+export default function Budget() {
+  // Use state to manage the budget categories, making them editable
+  const [budgetCategories, setBudgetCategories] = useState([
+    { name: 'Housing', budgeted: 1500, spent: 1200, type: 'needs' },
+    { name: 'Transportation', budgeted: 400, spent: 420, type: 'needs' },
+    { name: 'Groceries', budgeted: 600, spent: 485, type: 'needs' },
+    { name: 'Utilities', budgeted: 200, spent: 156, type: 'needs' },
+    { name: 'Entertainment', budgeted: 300, spent: 275, type: 'wants' },
+    { name: 'Dining Out', budgeted: 250, spent: 320, type: 'wants' },
+    { name: 'Emergency Fund', budgeted: 500, spent: 500, type: 'savings' },
+    { name: 'Retirement', budgeted: 800, spent: 800, type: 'savings' },
+  ]);
+
+  // Handle changes to the input fields for each category
+  const handleCategoryChange = (index, field, value) => {
+    const updatedCategories = [...budgetCategories];
+    updatedCategories[index][field] = Number(value);
+    setBudgetCategories(updatedCategories);
+  };
+
+  // Function to add a new budget category
+  const addCategory = () => {
+    setBudgetCategories([...budgetCategories, { name: 'New Category', budgeted: 0, spent: 0, type: 'needs' }]);
+  };
+
+  // Calculations are now based on the dynamic state
+  const totalBudgeted = budgetCategories.reduce((sum, cat) => sum + cat.budgeted, 0);
+  const totalSpent = budgetCategories.reduce((sum, cat) => sum + cat.spent, 0);
+  const remaining = totalBudgeted - totalSpent;
+>>>>>>> 2dd4f49395259ddafce85f328dad7e0934869d30
 
   // Add category form
   const [newName, setNewName] = useState('');
@@ -107,6 +141,7 @@ export default function Budget() {
   const [newAllocated, setNewAllocated] = useState('');
   const [addError, setAddError] = useState<string | null>(null);
 
+<<<<<<< HEAD
   // Edit category form
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editName, setEditName] = useState('');
@@ -303,6 +338,8 @@ export default function Budget() {
     setIsSettingsOpen(false);
   };
 
+=======
+>>>>>>> 2dd4f49395259ddafce85f328dad7e0934869d30
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -317,7 +354,11 @@ export default function Budget() {
               <Wallet className="w-4 h-4 mr-2" />
               Set Budget
             </Button>
+<<<<<<< HEAD
             <Button size="sm" className="bg-gradient-to-r from-primary to-primary/90" onClick={openAdd}>
+=======
+            <Button size="sm" onClick={addCategory} className="bg-gradient-to-r from-primary to-primary/90">
+>>>>>>> 2dd4f49395259ddafce85f328dad7e0934869d30
               <Plus className="w-4 h-4 mr-2" />
               Add Category
             </Button>
@@ -328,7 +369,7 @@ export default function Budget() {
           </div>
         </div>
 
-        {/* Budget Overview */}
+        {/* Budget Overview (now fully dynamic) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card className="shadow-soft">
             <CardContent className="p-6">
@@ -357,7 +398,11 @@ export default function Budget() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Remaining</p>
+<<<<<<< HEAD
                   <p className="text-2xl font-bold text-success">{INR.format(remaining / 100)}</p>
+=======
+                  <p className="text-2xl font-bold text-success">${remaining.toFixed(2)}</p>
+>>>>>>> 2dd4f49395259ddafce85f328dad7e0934869d30
                 </div>
                 <Target className="w-8 h-8 text-success" />
               </div>
@@ -396,7 +441,7 @@ export default function Budget() {
           </CardContent>
         </Card>
 
-        {/* Budget Categories */}
+        {/* Budget Categories (now with editable fields) */}
         <Card className="shadow-soft">
           <CardHeader>
             <CardTitle>Budget Categories</CardTitle>
@@ -424,6 +469,7 @@ export default function Budget() {
                           </Badge>
                         )}
                       </div>
+<<<<<<< HEAD
                       <div className="text-right">
                         <p className="font-semibold">
                           {INR.format(spent / 100)} / {INR.format(category.allocated / 100)}
@@ -431,6 +477,23 @@ export default function Budget() {
                         <p className="text-sm text-muted-foreground">
                           {percentage.toFixed(1)}%
                         </p>
+=======
+                      <div className="flex items-center space-x-2">
+                        <div className="text-sm text-muted-foreground">Budgeted:</div>
+                        <input 
+                          type="number"
+                          value={category.budgeted}
+                          onChange={(e) => handleCategoryChange(index, 'budgeted', e.target.value)}
+                          className="w-20 text-right font-semibold border-none bg-transparent"
+                        />
+                        <div className="text-sm text-muted-foreground">Spent:</div>
+                        <input
+                          type="number"
+                          value={category.spent}
+                          onChange={(e) => handleCategoryChange(index, 'spent', e.target.value)}
+                          className="w-20 text-right font-semibold border-none bg-transparent"
+                        />
+>>>>>>> 2dd4f49395259ddafce85f328dad7e0934869d30
                       </div>
                     </div>
                     <Progress 
