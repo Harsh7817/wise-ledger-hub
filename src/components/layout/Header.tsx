@@ -15,7 +15,8 @@ import { useTransactions } from "@/contexts/TransactionsContext";
 
 export const Header = () => {
   const { user, logout } = useAuth();
-<<<<<<< HEAD
+  const { searchQuery, setSearchQuery } = useTransactions();
+  
   // Load avatar from profile storage
   let profileAvatar = '';
   try {
@@ -25,9 +26,6 @@ export const Header = () => {
       profileAvatar = parsed?.avatarDataUrl || '';
     }
   } catch {}
-=======
-  const { searchQuery, setSearchQuery } = useTransactions();
->>>>>>> 2dd4f49395259ddafce85f328dad7e0934869d30
   return (
     <header className="h-16 border-b border-border bg-card px-6 flex items-center justify-between">
       <div className="flex items-center space-x-4 flex-1">
