@@ -45,7 +45,7 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/expenses" element={<Expenses />} />
       <Route path="/income" element={<Income />} />
       <Route path="/budget" element={<Budget />} />
